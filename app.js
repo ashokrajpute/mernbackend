@@ -161,7 +161,7 @@ app.post('/login',
       u:req.user._id,
       e:req.user.username
     }
-    res.cookie("ashokcookies",d);
+    res.cookie("ashokcookies",d,{ maxAge: 900000, httpOnly: true });
     res.send("u r login");
   });
 // app.post("/login",async (req,res)=>{
