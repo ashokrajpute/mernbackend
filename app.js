@@ -9,15 +9,18 @@ import session from "express-session";
 //import cors from "cors";
 //import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import cookie from "js-cookie";
-//import cors from  "cors";
+import cors from  "cors";
 import  findOrCreate from "mongoose-findorcreate"
  var app=express();
-//  app.use(cors);
+// app.use(cors);
 // var corsOptions = {
 //   origin: 'https://ashokmernmovie.netlify.app',
 //   optionsSuccessStatus: 200 // For legacy browser support
 // }
-//app.use(cors());
+app.use(cors({
+  origin: 'https://mernmovieashokft.onrender.com',
+  optionsSuccessStatus: 200 // For legacy browser support
+}));
  app.use(bodyparser.urlencoded({extended:true}));
  app.use(session({
   secret: 'moviesecret',
