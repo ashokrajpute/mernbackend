@@ -21,6 +21,10 @@ app.use(cors({
   origin: 'https://mernmovieashokft.onrender.com',
   optionsSuccessStatus: 200 // For legacy browser support
 }));
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
  app.use(bodyparser.urlencoded({extended:true}));
  app.use(session({
   secret: 'moviesecret',
