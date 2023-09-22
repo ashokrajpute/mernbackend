@@ -19,7 +19,8 @@ import  findOrCreate from "mongoose-findorcreate"
 // }
 app.use(cors({
   origin: 'https://mernmovieashokft.onrender.com',
-  optionsSuccessStatus: 200 // For legacy browser support
+  optionsSuccessStatus: 200 ,// For legacy browser support
+  credentials: true,
 }));
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', 'https://mernmovieashokft.onrender.com');
