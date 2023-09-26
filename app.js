@@ -113,7 +113,7 @@ app.post('/isauthenticated',async (req,res)=>{
  if(d){
   //console.log("==",d);
   d=JSON.stringify(d);
-  //console.log("===",d);
+ // console.log("===",d);
   res.send(d);
  }else{
 res.send('unvalid');}
@@ -162,18 +162,22 @@ app.post("/register",async(req,res)=>{
 //===
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: "/error" }),
-  function(req, res) {
+  async function(req, res) {
    // console.log(req.user);
     var d={
       u:req.user._id,
       e:req.user.username
     }
-    res.cookie("ashokcookies",d,{ maxAge: 900000, httpOnly: true });
-    res.send("u r login");
+    d=JSON.stringify(d);
+    //res.cookie("ashokcookies",d,{ maxAge: 900000, httpOnly: true });
+    // let ola= localStorage.setItem("lastname", "Smith");
+    // console.log(ola);
+    //console.log(d);
+    res.send(d);
   });
 // app.post("/login",async (req,res)=>{
 //   console.log("login");
-// var {useremail,userpassword:pass}=req.body;
+// var {username:useremail,password:pass}=req.body;
 //  console.log(useremail+" "+pass);
 // try{
 //   var v=await userModel.find({username:useremail,password:pass});
@@ -192,7 +196,7 @@ app.post('/login',
 //   res.send("Unable to login");
 // }
 // });
-//===
+// //===
 app.get('/error',(req,res)=>{
   // console.log("3")
 res.send("Unable to login");
@@ -202,7 +206,6 @@ app.post('/logout', function(req, res, next) {
   //console.log('logout');
   req.logout(function(err) {
     if (err) { return next(err); }
-    res.cookie('ashokcookies',"");
     res.send("Logout");
   });
 });
