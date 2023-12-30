@@ -17,17 +17,21 @@ import  findOrCreate from "mongoose-findorcreate"
 //   origin: 'https://ashokmernmovie.netlify.app',
 //   optionsSuccessStatus: 200 // For legacy browser support
 // }
-app.use(cors({
-  origin: 'https://mernmovieashokft.onrender.com',
-  optionsSuccessStatus: 200 ,// For legacy browser support
-  credentials: true,
-}));
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'https://mernmovieashokft.onrender.com');
-  res.header('Access-Control-Allow-Credentials', true);
-  //res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+//============*******============
+
+// app.use(cors({
+//   origin: 'https://mernmovieashokft.onrender.com',
+//   optionsSuccessStatus: 200 ,// For legacy browser support
+//   credentials: true,
+// }));
+// app.use(function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', 'https://mernmovieashokft.onrender.com');
+//   res.header('Access-Control-Allow-Credentials', true);
+//   //res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   next();
+// });
+
+//=================**********=========
  app.use(bodyparser.urlencoded({extended:true}));
  app.use(session({
   secret: 'moviesecret',
@@ -99,9 +103,14 @@ passport.deserializeUser(function(user, cb) {
 //     res.send("u r logined");
 //   });
 
-app.get("/",(req,res)=>{
+app.get("/",async (req,res)=>{
   //console.log("hello");
-res.send("hello");
+  //  var i=7;
+  //  console.log(i);
+  //   var d=await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=5540e483a20e0b20354dabc2d66a31c9&language=en-US&page=${i}`);
+  //   console.log(d.data.results);
+res.send("hello by Ashok");
+
 })
 // //======
 
@@ -196,7 +205,7 @@ app.post('/login',
 //   res.send("Unable to login");
 // }
 // });
-// //===
+// //=== 
 app.get('/error',(req,res)=>{
   // console.log("3")
 res.send("Unable to login");
@@ -220,16 +229,17 @@ app.post('/logout', function(req, res, next) {
 app.post('/addfav',async(req,res)=>{
  // var t=JSON.parse(req.body);
 
- 
+ console.log("addfav");
  var {user,movie}=req.body;
+ console.log(movie);
  var mfav=await userModel.findById(user.u);
- mfav=[...mfav.fav,movie];;
+ mfav=[...mfav.fav,movie];
+ console.log(mfav);
  
  setTimeout(async() => {
   await userModel.findOneAndUpdate({_id:user.u,username:user.e},{fav:mfav});
   res.send("add done")
  },1000);
-
 
 });
 
