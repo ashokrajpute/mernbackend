@@ -12,18 +12,18 @@ import cookie from "js-cookie";
 import cors from  "cors";
 import  findOrCreate from "mongoose-findorcreate"
  var app=express();
-// app.use(cors);
+app.use(cors);
 // var corsOptions = {
 //   origin: 'https://ashokmernmovie.netlify.app',
 //   optionsSuccessStatus: 200 // For legacy browser support
 // }
 //============*******============
 
-// app.use(cors({
-//   origin: 'https://mernmovieashokft.onrender.com',
-//   optionsSuccessStatus: 200 ,// For legacy browser support
-//   credentials: true,
-// }));
+app.use(cors({
+  origin: 'https://mernmovieashokft.onrender.com',
+  optionsSuccessStatus: 200 ,// For legacy browser support
+  credentials: true,
+}));
 // app.use(function(req, res, next) {
 //   res.header('Access-Control-Allow-Origin', 'https://mernmovieashokft.onrender.com');
 //   res.header('Access-Control-Allow-Credentials', true);
@@ -229,12 +229,12 @@ app.post('/logout', function(req, res, next) {
 app.post('/addfav',async(req,res)=>{
  // var t=JSON.parse(req.body);
 
- console.log("addfav");
+ //console.log("addfav");
  var {user,movie}=req.body;
- console.log(movie);
+ //console.log(movie);
  var mfav=await userModel.findById(user.u);
  mfav=[...mfav.fav,movie];
- console.log(mfav);
+ //console.log(mfav);
  
  setTimeout(async() => {
   await userModel.findOneAndUpdate({_id:user.u,username:user.e},{fav:mfav});
